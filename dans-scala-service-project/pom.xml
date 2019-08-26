@@ -22,17 +22,17 @@
     <parent>
         <groupId>nl.knaw.dans.shared</groupId>
         <artifactId>dans-scala-app-project</artifactId>
-        <version>4.0.0-SNAPSHOT</version>
+        <version>4.0.0</version>
         <relativePath>../dans-scala-app-project</relativePath>
     </parent>
 
     <artifactId>dans-scala-service-project</artifactId>
-    <version>4.0.0-SNAPSHOT</version>
+    <version>4.0.0</version>
     <name>DANS Scala Service Project</name>
     <packaging>pom</packaging>
     <scm>
         <developerConnection>scm:git:https://github.com/DANS-KNAW/${project.artifactId}</developerConnection>
-        <tag>HEAD</tag>
+        <tag>v4.0.0</tag>
     </scm>
     <repositories>
         <repository>

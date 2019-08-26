@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>nl.knaw.dans.shared</groupId>
+    <artifactId>dans-parent-pom</artifactId>
+    <name>DANS Maven Parents Master Build</name>
+    <version>4.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <scm>
+        <developerConnection>scm:git:https://github.com/DANS-KNAW/${project.artifactId}</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+    <properties>
+        <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
+    </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>3.0.0-M1</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>${maven-release-plugin.version}</version>
+                <configuration>
+                    <tagNameFormat>v@{project.version}</tagNameFormat>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <modules>
+        <module>dans-mvn-base</module>
+        <module>dans-mvn-plugin-defaults</module>
+        <module>dans-mvn-lib-defaults</module>
+        <module>dans-mvn-build-resources</module>
+        <module>dans-scala-project</module>
+        <module>dans-scala-app-project</module>
+        <module>dans-scala-service-project</module>
+        <module>dans-java-project</module>
+    </modules>
+</project>

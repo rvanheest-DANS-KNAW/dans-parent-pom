@@ -1,0 +1,903 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2018 DANS - Data Archiving and Networked Services (info@dans.knaw.nl)
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>nl.knaw.dans.shared</groupId>
+        <artifactId>dans-mvn-base</artifactId>
+        <version>4.0.0-SNAPSHOT</version>
+        <relativePath>../dans-mvn-base</relativePath>
+    </parent>
+    <artifactId>dans-mvn-plugin-defaults</artifactId>
+    <name>DANS Maven Project Plug-In Defaults</name>
+    <version>4.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <description>
+        Defines the default configuration and version for plug-ins used in DANS projects.
+    </description>
+    <scm>
+        <developerConnection>scm:git:https://github.com/DANS-KNAW/${project.artifactId}</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+    <properties>
+        <!-- Build resources support -->
+        <dans-mvn-build-resources.version>4.0.0</dans-mvn-build-resources.version>
+        <maven-dependency-plugin.version>3.0.2</maven-dependency-plugin.version>
+        <scala.version>2.12.3</scala.version>
+        <scala.binary.version>2.12</scala.binary.version>
+        <scala-maven-plugin.version>3.4.6</scala-maven-plugin.version>
+        <kind-projector-compiler-plugin.version>0.9.9</kind-projector-compiler-plugin.version>
+        <scalatest-maven-plugin.version>1.0</scalatest-maven-plugin.version>
+
+        <!-- Building binaries and source packages -->
+        <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
+        <java.version>1.6</java.version><!-- Still using Java 1.6 as default, for legacy projects -->
+        <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
+        <maven-jar-plugin.version>2.4</maven-jar-plugin.version>
+        <maven-war-plugin.version>2.6</maven-war-plugin.version>
+        <maven-surefire-plugin.version>2.21.0</maven-surefire-plugin.version>
+        <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
+
+        <!-- Assembling installables -->
+        <maven-antrun-plugin.version>1.8</maven-antrun-plugin.version>
+        <rpm-maven-plugin.version>2.1.5</rpm-maven-plugin.version>
+        <rpm-release/><!-- Only declared here, override on the command line if you need a custom release for the RPM -->
+        <dans-provider-name>dans.knaw.nl</dans-provider-name>
+        <rpm-replace-configuration>true</rpm-replace-configuration> <!-- Change to noreplace  if you want to support automatically upgrading config files in post install scripts -->
+        <main-class>NoMainClass</main-class><!-- Only a placeholder is declared here. The inheriting project should fill in the FQN of the main class -->
+        <maven-assembly-plugin.version>3.0.0</maven-assembly-plugin.version>
+
+        <!-- Distributing installables -->
+        <rpm-snapshot-repository>http://maven-repo.dans.knaw.nl/repository/rpm-snapshots</rpm-snapshot-repository>
+        <rpm-release-repository>http://maven-repo.dans.knaw.nl/repository/rpm-releases</rpm-release-repository>
+        <rpm-snapshot-repository-test>http://dnexus.dans.knaw.nl/repository/rpm-snapshots</rpm-snapshot-repository-test>
+        <rpm-release-repository-test>http://dnexus.dans.knaw.nl/repository/rpm-releases</rpm-release-repository-test>
+
+        <!-- Debugging -->
+        <exec-maven-plugin.version>1.4.0</exec-maven-plugin.version>
+
+        <!-- Static code analysis -->
+        <scalastyle-maven-plugin.version>1.0.0</scalastyle-maven-plugin.version>
+
+        <!-- Legacy -->
+        <aspectj-maven-plugin.version>1.4</aspectj-maven-plugin.version>
+        <build-helper-maven-plugin.version>1.8</build-helper-maven-plugin.version>
+        <maven-jibx-plugin.version>1.2.5</maven-jibx-plugin.version>
+        <maven-javadoc-plugin.version>2.10.3</maven-javadoc-plugin.version>
+        <maven-java-formatter-plugin.version>0.4</maven-java-formatter-plugin.version>
+        <maven-site-plugin.version>3.7</maven-site-plugin.version>
+    </properties>
+    <repositories>
+        <repository>
+            <id>DANS</id>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <url>http://maven.dans.knaw.nl/</url>
+        </repository>
+    </repositories>
+    <dependencies>
+        <dependency>
+            <groupId>nl.knaw.dans.shared</groupId>
+            <artifactId>dans-mvn-build-resources</artifactId>
+            <version>4.0.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!-- Building binaries and source packages -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                        <!-- By default project.build.sourceEncoding is not used by the compiler plug-in and
+                             it defaults to ASCII, which messed up some unit tests that specifically used
+                             files with Greek letters in it. -->
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                        <excludes>
+                            <exclude>**/package.html</exclude>
+                            <exclude>**/overview.html</exclude>
+                        </excludes>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>${maven-source-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>attach-sources</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>jar-no-fork</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <includePom>true</includePom>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${maven-jar-plugin.version}</version>
+                    <configuration>
+                        <archive>
+                            <manifest>
+                                <addClasspath>true</addClasspath>
+                                <classpathPrefix>../lib/</classpathPrefix>
+                                <mainClass>${main-class}</mainClass>
+                            </manifest>
+                        </archive>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>${maven-war-plugin.version}</version>
+                    <configuration>
+                        <warName>${project.artifactId}</warName>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>net.alchim31.maven</groupId>
+                    <artifactId>scala-maven-plugin</artifactId>
+                    <version>${scala-maven-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>compile</goal>
+                                <goal>testCompile</goal>
+                                <goal>add-source</goal>
+                                <goal>doc-jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <scalaCompatVersion>${scala.binary.version}</scalaCompatVersion>
+                        <scalaVersion>${scala.version}</scalaVersion>
+                        <args>
+                            <arg>-target:jvm-1.8</arg>
+                            <arg>-deprecation</arg>
+                            <arg>-feature</arg>
+                        </args>
+                        <compilerPlugins>
+                            <compilerPlugin>
+                                <groupId>org.spire-math</groupId>
+                                <artifactId>kind-projector_2.12</artifactId>
+                                <version>${kind-projector-compiler-plugin.version}</version>
+                            </compilerPlugin>
+                        </compilerPlugins>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.scalatest</groupId>
+                    <artifactId>scalatest-maven-plugin</artifactId>
+                    <version>${scalatest-maven-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>test</id>
+                            <goals>
+                                <goal>test</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
+                        <junitxml>.</junitxml>
+                        <filereports>WDF TestSuite.txt</filereports>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven-surefire-plugin.version}</version>
+                </plugin>
+
+
+                <!-- Assembling installables -->
+                <!--
+                    The antrun plug-in runs a Java class that generates the RPM-scripts, taking the ones defined in the inheriting project, if present,
+                    and otherwise generates an empty one.
+
+                    The RPM plugin then builds an RPM and includes the generated scripts. Those scripts are executed at certain
+                    events defined by RPM.
+                -->
+                <plugin>
+                    <artifactId>maven-antrun-plugin</artifactId>
+                    <version>${maven-antrun-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <phase>generate-sources</phase>
+                            <configuration>
+                                <target name="generate-rpm-scripts">
+                                    <java classname="nl.knaw.dans.build.GenerateRpmScripts" failonerror="true">
+                                        <arg value="${project.build.directory}/dans-build-resources/rpm-includes"/>
+                                        <arg value="${project.build.directory}/dans-rpm-scripts"/>
+                                        <arg value="${project.basedir}/src/main/rpm/build-0-prepare.sh"/>
+                                        <arg value="${project.basedir}/src/main/rpm/build-1-install.sh"/>
+                                        <arg value="${project.basedir}/src/main/rpm/build-2-clean.sh"/>
+                                        <arg value="${project.basedir}/src/main/rpm/0-pre-trans.sh"/>
+                                        <arg value="${project.basedir}/src/main/rpm/1-pre-install.sh"/>
+                                        <arg value="${project.basedir}/src/main/rpm/2-post-install.sh"/>
+                                        <arg value="${project.basedir}/src/main/rpm/3-pre-remove.sh"/>
+                                        <arg value="${project.basedir}/src/main/rpm/4-post-remove.sh"/>
+                                        <arg value="${project.basedir}/src/main/rpm/5-post-trans.sh"/>
+                                        <arg value="${project.basedir}/src/main/rpm/6-verify.sh"/>
+                                        <classpath>
+                                            <!-- Somehow using project.build.directory here does not work -->
+                                            <pathelement location="target/dans-build-resources"/>
+                                        </classpath>
+                                    </java>
+                                </target>
+                            </configuration>
+                            <goals>
+                                <goal>run</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>get-project-type</id>
+                            <phase>validate</phase>
+                            <configuration>
+                                <exportAntProperties>true</exportAntProperties>
+                                <target>
+                                    <echo message="Setting dynamic properties (default)"/>
+                                    <!--suppress UnresolvedMavenProperty -->
+                                    <echo message="Current value: skip-exec = ${skip-exec}"/>
+                                    <condition property="isSnapshot">
+                                        <contains string="${project.version}" substring="SNAPSHOT"/>
+                                    </condition>
+                                    <condition property="isPomProject">
+                                        <equals arg1="${project.packaging}" arg2="pom"/>
+                                    </condition>
+                                    <!--suppress UnresolvedMavenProperty -->
+                                    <echo message="isSnapshot = ${isSnapshot}"/>
+                                    <!--suppress UnresolvedMavenProperty -->
+                                    <echo message="isPomProject = ${isPomProject}"/>
+
+                                    <!-- Turn on alternative deploy via exec-maven-plugin if this is not a pom-project (assuming it is RPM) ... -->
+                                    <condition property="skip-exec"
+                                               value="true">
+                                        <isset property="isPomProject"/>
+                                    </condition>
+                                    <condition property="skip-deploy"
+                                               value="false">
+                                        <isset property="isPomProject"/>
+                                    </condition>
+                                    <!-- If a pom-project, then switch on normal maven-deploy-plugin -->
+                                    <property name="skip-exec" value="false"/>
+                                    <property name="skip-deploy" value="true"/>
+
+                                    <!-- Set the rpm-repository-url (only if non-pom-project) -->
+                                    <condition property="rpm-repository-url"
+                                               value="${rpm-snapshot-repository}">
+                                        <and>
+                                            <not>
+                                                <isset property="isPomProject"/>
+                                            </not>
+                                            <isset property="isSnapshot"/>
+                                        </and>
+                                    </condition>
+                                    <condition property="rpm-repository-url"
+                                               value="${rpm-release-repository}">
+                                        <and>
+                                            <not>
+                                                <isset property="isPomProject"/>
+                                            </not>
+                                            <not>
+                                                <isset property="isSnapshot"/>
+                                            </not>
+                                        </and>
+                                    </condition>
+                                    <!--suppress UnresolvedMavenProperty -->
+                                    <echo message="rpm-repository-url = ${rpm-repository-url}"/>
+                                </target>
+                            </configuration>
+                            <goals>
+                                <goal>run</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>rpm-maven-plugin</artifactId>
+                    <version>${rpm-maven-plugin.version}</version>
+                    <configuration>
+                        <group>Applications/Archiving</group>
+                        <release>${rpm-release}</release>
+                        <vendor>${dans-provider-name}</vendor>
+                        <packager>${dans-provider-name}</packager>
+                        <name>${dans-provider-name}-${project.artifactId}</name>
+                        <defaultUsername>root</defaultUsername>
+                        <defaultGroupname>root</defaultGroupname>
+                        <license>Apache 2.0</license>
+                        <targetOS>Linux</targetOS>
+                        <defaultFilemode>744</defaultFilemode>
+                        <defaultDirmode>755</defaultDirmode>
+                        <requires>
+                            <require>java-1.8.0-openjdk</require>
+                        </requires>
+                        <mappings>
+                            <!-- Contents of ${app.home}/lib -->
+                            <mapping>
+                                <directory>/opt/${dans-provider-name}/${project.artifactId}/lib</directory>
+                                <dependency>
+                                    <stripVersion>false</stripVersion>
+                                </dependency>
+                            </mapping>
+                            <!-- Read-only contents of ${app.home}/bin  -->
+                            <mapping>
+                                <directory>/opt/${dans-provider-name}/${project.artifactId}/bin</directory>
+                                <sources>
+                                    <source>
+                                        <location>src/main/assembly/dist/bin</location>
+                                        <excludes>
+                                            <!-- This is the executable, so exclude here -->
+                                            <exclude>${project.artifactId}-${project.version}</exclude>
+                                        </excludes>
+                                    </source>
+                                    <source>
+                                        <location>${project.build.directory}/${project.artifactId}-${project.version}.jar</location>
+                                    </source>
+                                    <source>
+                                        <location>${project.build.directory}/version/version</location>
+                                    </source>
+                                </sources>
+                            </mapping>
+                            <!-- Executable contents of ${app.home}/bin -->
+                            <mapping>
+                                <directory>/opt/${dans-provider-name}/${project.artifactId}/bin</directory>
+                                <filemode>755</filemode>
+                                <sources>
+                                    <source>
+                                        <location>src/main/assembly/dist/bin/${project.artifactId}</location>
+                                    </source>
+                                </sources>
+                            </mapping>
+                            <!-- Contents of cfg dir under /etc/opt ... -->
+                            <mapping>
+                                <directory>/etc/opt/${dans-provider-name}/${project.artifactId}</directory>
+                                <configuration>${rpm-replace-configuration}</configuration>
+                                <sources>
+                                    <source>
+                                        <location>src/main/assembly/dist/cfg</location>
+                                    </source>
+                                </sources>
+                            </mapping>
+                            <!-- Contents of ${app.home}/{*-bin/cfg} -->
+                            <mapping>
+                                <directory>/opt/${dans-provider-name}/${project.artifactId}</directory>
+                                <sources>
+                                    <source>
+                                        <location>src/main/assembly/dist</location>
+                                        <excludes>
+                                            <exclude>bin/*</exclude>
+                                            <exclude>cfg/*</exclude>
+                                        </excludes>
+                                    </source>
+                                </sources>
+                            </mapping>
+                            <!-- Symlink to executable, to put it on the PATH -->
+                            <mapping>
+                                <directory>/opt/bin</directory>
+                                <sources>
+                                    <softlinkSource>
+                                        <location>/opt/${dans-provider-name}/${project.artifactId}/bin/${project.artifactId}</location>
+                                    </softlinkSource>
+                                </sources>
+                            </mapping>
+                            <!-- Symlink jar to version-less location -->
+                            <mapping>
+                                <directory>/opt/${dans-provider-name}/${project.artifactId}/bin/</directory>
+                                <sources>
+                                    <softlinkSource>
+                                        <destination>${project.artifactId}.jar</destination>
+                                        <location>/opt/${dans-provider-name}/${project.artifactId}/bin/${project.artifactId}-${project.version}.jar</location>
+                                    </softlinkSource>
+                                </sources>
+                            </mapping>
+                        </mappings>
+                        <!-- Build-time scripts -->
+                        <prepareScriptlet>
+                            <scriptFile>target/dans-rpm-scripts/build-0-prepare.sh</scriptFile>
+                            <fileEncoding>UTF-8</fileEncoding>
+                        </prepareScriptlet>
+                        <installScriptlet>
+                            <scriptFile>target/dans-rpm-scripts/build-1-install.sh</scriptFile>
+                            <fileEncoding>UTF-8</fileEncoding>
+                        </installScriptlet>
+                        <cleanScriptlet>
+                            <!-- NOTE: I have not been able to establish that this script is executed at all -->
+                            <scriptFile>target/dans-rpm-scripts/build-2-clean.sh</scriptFile>
+                            <fileEncoding>UTF-8</fileEncoding>
+                        </cleanScriptlet>
+
+                        <!-- Install/erase-time scripts -->
+                        <pretransScriptlet>
+                            <scriptFile>target/dans-rpm-scripts/0-pre-trans.sh</scriptFile>
+                            <fileEncoding>UTF-8</fileEncoding>
+                        </pretransScriptlet>
+                        <preinstallScriptlet>
+                            <scriptFile>target/dans-rpm-scripts/1-pre-install.sh</scriptFile>
+                            <fileEncoding>UTF-8</fileEncoding>
+                        </preinstallScriptlet>
+                        <postinstallScriptlet>
+                            <scriptFile>target/dans-rpm-scripts/2-post-install.sh</scriptFile>
+                            <fileEncoding>UTF-8</fileEncoding>
+                        </postinstallScriptlet>
+                        <preremoveScriptlet>
+                            <scriptFile>target/dans-rpm-scripts/3-pre-remove.sh</scriptFile>
+                            <fileEncoding>UTF-8</fileEncoding>
+                        </preremoveScriptlet>
+                        <postremoveScriptlet>
+                            <scriptFile>target/dans-rpm-scripts/4-post-remove.sh</scriptFile>
+                            <fileEncoding>UTF-8</fileEncoding>
+                        </postremoveScriptlet>
+                        <posttransScriptlet>
+                            <scriptFile>target/dans-rpm-scripts/5-post-trans.sh</scriptFile>
+                            <fileEncoding>UTF-8</fileEncoding>
+                        </posttransScriptlet>
+                        <verifyScriptlet>
+                            <!-- NOTE: I have not been able to establish that this script is executed at all -->
+                            <scriptFile>target/dans-rpm-scripts/6-verify.sh</scriptFile>
+                            <fileEncoding>UTF-8</fileEncoding>
+                        </verifyScriptlet>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>attach-rpm</id>
+                            <goals>
+                                <goal>attached-rpm</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <!-- Alternative assembly: a TAR-file -->
+                <plugin>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>${maven-assembly-plugin.version}</version>
+                    <configuration>
+                        <appendAssemblyId>false</appendAssemblyId>
+                        <descriptors>
+                            <descriptor>src/main/assembly/bin.xml</descriptor>
+                        </descriptors>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>make-assembly</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>single</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <!-- Distributing installables -->
+                <plugin>
+                    <!--
+                    This will call a python script included in dans-mvn-build-resources. The python script will
+                    deploy the RPM using the Nexus REST API for Yum repositories. It will also double check
+                    that that RPM is a snapshot.
+
+                    NOTE: The Nexus Credentials must available in the environment variables NEXUS_USER and NEXUS_PASSWORD!!
+                    (I could find no easy way to read the credentials from ~/.m2/settings.xml, where they are also provided,
+                    for the maven-deploy-plugin)
+                    -->
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>${exec-maven-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <phase>deploy</phase>
+                            <goals>
+                                <goal>exec</goal>
+                            </goals>
+                            <configuration>
+                                <executable>python</executable>
+                                <workingDirectory>${project.basedir}</workingDirectory>
+                                <arguments>
+                                    <argument>${project.build.directory}/dans-build-resources/script/deploy-rpm.py</argument>
+                                    <!--suppress UnresolvedMavenProperty -->
+                                    <argument>${env.NEXUS_USER}</argument>
+                                    <!--suppress UnresolvedMavenProperty -->
+                                    <argument>${env.NEXUS_PASSWORD}</argument>
+                                    <!--suppress UnresolvedMavenProperty -->
+                                    <argument>${rpm-repository-url}/</argument>
+                                    <argument>${project.build.directory}</argument>
+                                </arguments>
+                            </configuration>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <mainClass>${main-class}</mainClass>
+                        <!-- Ignore, because property will be created dynamically, by the antrun plugin -->
+                        <!--suppress UnresolvedMavenProperty, MavenModelInspection -->
+                        <skip>${skip-exec}</skip>
+                    </configuration>
+                </plugin>
+
+                <!-- Debugging -->
+                <!-- Also uses exec-maven-plugin, see above -->
+
+                <!-- Static code analysis -->
+                <plugin>
+                    <groupId>org.scalastyle</groupId>
+                    <artifactId>scalastyle-maven-plugin</artifactId>
+                    <version>${scalastyle-maven-plugin.version}</version>
+                    <configuration>
+                        <verbose>false</verbose>
+                        <failOnViolation>true</failOnViolation>
+                        <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                        <failOnWarning>false</failOnWarning>
+                        <sourceDirectory>${project.basedir}/src/main/scala</sourceDirectory>
+                        <testSourceDirectory>${project.basedir}/src/test/scala</testSourceDirectory>
+                        <configLocation>${project.basedir}/scalastyle_config.xml</configLocation>
+                        <outputFile>${project.build.directory}/scalastyle-output.xml</outputFile>
+                        <outputEncoding>UTF-8</outputEncoding>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <!-- Legacy AspectJ support -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>aspectj-maven-plugin</artifactId>
+                    <version>${aspectj-maven-plugin.version}</version>
+                    <configuration>
+                        <verbose>true</verbose>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>compile</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>${build-helper-maven-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>add-source</id>
+                            <phase>generate-sources</phase>
+                            <goals>
+                                <goal>add-source</goal>
+                            </goals>
+                            <configuration>
+                                <sources>
+                                    <source>src/main/aspect</source>
+                                </sources>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <!-- Legacy JavaDoc generator -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>${maven-javadoc-plugin.version}</version>
+                    <!-- Default configuration for all reports -->
+                    <configuration>
+                        <encoding>UTF-8</encoding>
+                        <linksource>true</linksource>
+                        <quiet>true</quiet>
+                        <bottom><![CDATA[Copyright ${project.inceptionYear}, <a href="http://www.dans.knaw.nl">DANS<a>]]></bottom>
+                        <overview>src/main/java/overview.html</overview>
+                        <additionalJOptions>
+                            <additionalJOption>-J-Xmx1g</additionalJOption>
+                            <additionalJOption>-J-Djava.awt.headless=true</additionalJOption>
+                        </additionalJOptions>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>attach-javadoc</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>aggregate</id>
+                            <goals>
+                                <goal>aggregate</goal>
+                            </goals>
+                            <phase>site</phase>
+                            <configuration>
+                                <!-- Specific configuration for the aggregate report -->
+                                <stylesheetfile>stylesheet.css</stylesheetfile>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <!-- Legacy way of running servlet. We now use stand-alone services that are run the the exec-maven-plugin-->
+                <plugin>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-maven-plugin</artifactId>
+                    <version>${jetty.version}</version>
+                </plugin>
+
+                <!-- Legacy XML binding framework -->
+                <plugin>
+                    <groupId>org.jibx</groupId>
+                    <artifactId>maven-jibx-plugin</artifactId>
+                    <version>${maven-jibx-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>bind</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <directory>src/main/config/</directory>
+                        <includes>
+                            <includes>*-binding.xml</includes>
+                        </includes>
+                        <verbose>false</verbose>
+                    </configuration>
+                </plugin>
+
+                <!-- Legacy code formatter -->
+                <plugin>
+                    <groupId>com.googlecode.maven-java-formatter-plugin</groupId>
+                    <artifactId>maven-java-formatter-plugin</artifactId>
+                    <version>${maven-java-formatter-plugin.version}</version>
+                    <configuration>
+                        <configFile>${project.build.directory}/dans-build-resources/code-formatting/dans-java-formatting-style.xml</configFile>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>format</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <!-- Legacy Maven site generation -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>${maven-site-plugin.version}</version>
+                </plugin>
+
+                <!-- Legacy to keep Eclipse happy, for projects that still need it -->
+                <plugin>
+                    <groupId>org.eclipse.m2e</groupId>
+                    <artifactId>lifecycle-mapping</artifactId>
+                    <version>1.0.0</version>
+                    <configuration>
+                        <lifecycleMappingMetadata>
+                            <pluginExecutions>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>
+                                            com.googlecode.maven-java-formatter-plugin
+                                        </groupId>
+                                        <artifactId>
+                                            maven-java-formatter-plugin
+                                        </artifactId>
+                                        <versionRange>
+                                            [0.3.1,)
+                                        </versionRange>
+                                        <goals>
+                                            <goal>format</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore/>
+                                    </action>
+                                </pluginExecution>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>
+                                            org.apache.maven.plugins
+                                        </groupId>
+                                        <artifactId>
+                                            maven-dependency-plugin
+                                        </artifactId>
+                                        <versionRange>
+                                            [2.4,)
+                                        </versionRange>
+                                        <goals>
+                                            <goal>unpack</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore/>
+                                    </action>
+                                </pluginExecution>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>
+                                            org.codehaus.mojo
+                                        </groupId>
+                                        <artifactId>
+                                            aspectj-maven-plugin
+                                        </artifactId>
+                                        <versionRange>
+                                            [1.4,)
+                                        </versionRange>
+                                        <goals>
+                                            <goal>compile</goal>
+                                            <goal>test-compile</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <execute>
+                                            <runOnIncremental>true</runOnIncremental>
+                                        </execute>
+                                    </action>
+                                </pluginExecution>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>
+                                            org.codehaus.mojo
+                                        </groupId>
+                                        <artifactId>
+                                            build-helper-maven-plugin
+                                        </artifactId>
+                                        <versionRange>
+                                            [1.8,)
+                                        </versionRange>
+                                        <goals>
+                                            <goal>add-source</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <execute>
+                                            <runOnIncremental>true</runOnIncremental>
+                                        </execute>
+                                    </action>
+                                </pluginExecution>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>org.jibx</groupId>
+                                        <artifactId>maven-jibx-plugin</artifactId>
+                                        <versionRange>[1.1.6a,)</versionRange>
+                                        <goals>
+                                            <goal>bind</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <execute>
+                                            <runOnIncremental>true</runOnIncremental>
+                                        </execute>
+                                    </action>
+                                </pluginExecution>
+                            </pluginExecutions>
+                        </lifecycleMappingMetadata>
+                    </configuration>
+                </plugin>
+
+            </plugins>
+        </pluginManagement>
+
+        <!-- The following plug-ins are always inherited, to make sure that the license headers are always checked. -->
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>${maven-dependency-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>nl.knaw.dans.shared</groupId>
+                                    <artifactId>dans-mvn-build-resources</artifactId>
+                                    <version>4.0.0-SNAPSHOT</version>
+                                    <outputDirectory>${project.build.directory}/dans-build-resources</outputDirectory>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>${license-maven-plugin.version}</version>
+                <configuration>
+                    <header>${project.build.directory}/dans-build-resources/license/apache2.txt</header>
+                    <properties>
+                        <owner>DANS - Data Archiving and Networked Services</owner>
+                        <email>info@dans.knaw.nl</email>
+                    </properties>
+                    <excludes>
+                        <exclude>.github/**</exclude>
+                        <exclude>LICENSE</exclude>
+                        <exclude>**/README</exclude>
+                        <exclude>**/*.sc</exclude>
+                        <exclude>**/*.graphml</exclude>
+                        <exclude>home/</exclude>
+                        <exclude>out/</exclude>
+                        <exclude>data/</exclude>
+                        <exclude>data-*/</exclude>
+                        <exclude>**/hosts</exclude>
+                        <exclude>**/*.retry</exclude>
+                        <exclude>apphome.sh</exclude>
+                        <exclude>**/*.template</exclude>
+                        <exclude>src/test/resources/**</exclude>
+                        <exclude>src/site/resources/**</exclude>
+                        <exclude>src/main/resources/**</exclude>
+                        <exclude>src/main/assembly/dist/**</exclude>
+                        <exclude>.yum-repo/</exclude>
+                        <exclude>.dans.knaw.nl-yum-repo/</exclude>
+                        <exclude>*.pyc</exclude>
+                        <exclude>**/*.conf</exclude>
+                        <exclude>**/*.fact</exclude>
+                        <exclude>**/*.ldif</exclude>
+                        <exclude>docs/</exclude>
+                        <exclude>node_modules/</exclude>
+                    </excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>${maven-deploy-plugin.version}</version>
+                <configuration>
+                    <!-- Ignore, because property will be created dynamically, by the antrun plugin -->
+                    <!--suppress UnresolvedMavenProperty, MavenModelInspection -->
+                    <skip>${skip-deploy}</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <profiles>
+        <profile>
+            <id>lib-deploy</id>
+            <properties>
+                <skip-exec>true</skip-exec>
+                <skip-deploy>false</skip-deploy>
+            </properties>
+        </profile>
+    </profiles>
+</project>

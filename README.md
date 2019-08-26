@@ -165,7 +165,6 @@ Prerequisites:
 
 Steps:
 
-    git clone -o blessed https://github.com/DANS-KNAW/dans-mvn-parent.git ~/git/service/dans-parent/dans-mvn-parent
-    cd ~/git/service/dans-parent/dans-mvn-parent
-    ./code-update.py
+    git clone -o blessed https://github.com/DANS-KNAW/dans-parent-prom.git
+    cd dans-parent-pom
     mvn install

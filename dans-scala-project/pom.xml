@@ -22,12 +22,12 @@
     <parent>
         <groupId>nl.knaw.dans.shared</groupId>
         <artifactId>dans-mvn-lib-defaults</artifactId>
-        <version>4.0.0</version>
+        <version>4.0.1-SNAPSHOT</version>
         <relativePath>../dans-mvn-lib-defaults</relativePath>
     </parent>
 
     <artifactId>dans-scala-project</artifactId>
-    <version>4.0.0</version>
+    <version>4.0.1-SNAPSHOT</version>
     <name>DANS Scala Project</name>
     <description>
         A bare bones Scala-based project. The best choice when creating a Scala based library.
@@ -35,7 +35,7 @@
     </description>
     <scm>
         <developerConnection>scm:git:https://github.com/DANS-KNAW/${project.artifactId}</developerConnection>
-        <tag>v4.0.0</tag>
+        <tag>HEAD</tag>
     </scm>
     <packaging>pom</packaging>
     <repositories>

@@ -20,15 +20,15 @@
     <parent>
         <groupId>nl.knaw.dans.shared</groupId>
         <artifactId>dans-mvn-base</artifactId>
-        <version>4.0.1</version>
+        <version>4.0.2-SNAPSHOT</version>
         <relativePath>../dans-mvn-base</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>dans-mvn-build-resources</artifactId>
-    <version>4.0.1</version>
+    <version>4.0.2-SNAPSHOT</version>
     <scm>
         <developerConnection>scm:git:https://github.com/DANS-KNAW/${project.artifactId}</developerConnection>
-        <tag>v4.0.1</tag>
+        <tag>HEAD</tag>
     </scm>
     <packaging>jar</packaging>
     <name>DANS Build Resources</name>

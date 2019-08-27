@@ -4,11 +4,11 @@
     <groupId>nl.knaw.dans.shared</groupId>
     <artifactId>dans-parent-pom</artifactId>
     <name>DANS Maven Parents Master Build</name>
-    <version>4.0.1-SNAPSHOT</version>
+    <version>4.0.1</version>
     <packaging>pom</packaging>
     <scm>
         <developerConnection>scm:git:https://github.com/DANS-KNAW/${project.artifactId}</developerConnection>
-        <tag>HEAD</tag>
+        <tag>v4.0.1</tag>
     </scm>
     <properties>
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>

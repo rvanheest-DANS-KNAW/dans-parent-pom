@@ -39,10 +39,10 @@
         <!-- Build resources support -->
         <dans-mvn-build-resources.version>4.0.0</dans-mvn-build-resources.version>
         <maven-dependency-plugin.version>3.0.2</maven-dependency-plugin.version>
-        <scala.version>2.12.3</scala.version>
+        <scala.version>2.12.8</scala.version>
         <scala.binary.version>2.12</scala.binary.version>
-        <scala-maven-plugin.version>3.4.6</scala-maven-plugin.version>
-        <kind-projector-compiler-plugin.version>0.9.9</kind-projector-compiler-plugin.version>
+        <scala-maven-plugin.version>4.0.2</scala-maven-plugin.version>
+        <kind-projector-compiler-plugin.version>0.10.3</kind-projector-compiler-plugin.version>
         <scalatest-maven-plugin.version>1.0</scalatest-maven-plugin.version>
 
         <!-- Building binaries and source packages -->
@@ -96,7 +96,7 @@
         <dependency>
             <groupId>nl.knaw.dans.shared</groupId>
             <artifactId>dans-mvn-build-resources</artifactId>
-            <version>4.0.1-SNAPSHOT</version>
+            <version>${dans-mvn-build-resources.version}</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
@@ -175,6 +175,7 @@
                     <configuration>
                         <scalaCompatVersion>${scala.binary.version}</scalaCompatVersion>
                         <scalaVersion>${scala.version}</scalaVersion>
+                        <recompileMode>all</recompileMode>
                         <args>
                             <arg>-target:jvm-1.8</arg>
                             <arg>-deprecation</arg>
@@ -182,7 +183,7 @@
                         </args>
                         <compilerPlugins>
                             <compilerPlugin>
-                                <groupId>org.spire-math</groupId>
+                                <groupId>org.typelevel</groupId>
                                 <artifactId>kind-projector_2.12</artifactId>
                                 <version>${kind-projector-compiler-plugin.version}</version>
                             </compilerPlugin>
@@ -819,7 +820,7 @@
                                 <artifactItem>
                                     <groupId>nl.knaw.dans.shared</groupId>
                                     <artifactId>dans-mvn-build-resources</artifactId>
-                                    <version>4.0.0-SNAPSHOT</version>
+                                    <version>${dans-mvn-build-resources.version}</version>
                                     <outputDirectory>${project.build.directory}/dans-build-resources</outputDirectory>
                                 </artifactItem>
                             </artifactItems>

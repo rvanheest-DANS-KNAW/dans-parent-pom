@@ -21,7 +21,7 @@
     <groupId>nl.knaw.dans.shared</groupId>
     <artifactId>dans-mvn-base</artifactId>
     <name>DANS Maven Project Basic Settings</name>
-    <version>4.0.1-SNAPSHOT</version>
+    <version>4.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <description>
         Parent project for all DANS Maven-based projects.

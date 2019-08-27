@@ -1,4 +1,0 @@
-One include at the end of the file.
-
-
-#include <single-line.txt>

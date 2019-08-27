@@ -1,5 +1,0 @@
-One include here,
-
-#include <multi-line.txt>
-
-in the middle.

@@ -64,10 +64,8 @@
         <maven-assembly-plugin.version>3.0.0</maven-assembly-plugin.version>
 
         <!-- Distributing installables -->
-        <rpm-snapshot-repository>http://maven-repo.dans.knaw.nl/repository/rpm-snapshots</rpm-snapshot-repository>
-        <rpm-release-repository>http://maven-repo.dans.knaw.nl/repository/rpm-releases</rpm-release-repository>
-        <rpm-snapshot-repository-test>http://dnexus.dans.knaw.nl/repository/rpm-snapshots</rpm-snapshot-repository-test>
-        <rpm-release-repository-test>http://dnexus.dans.knaw.nl/repository/rpm-releases</rpm-release-repository-test>
+        <rpm-snapshot-repository>http://nexus.dans.knaw.nl/repository/rpm-snapshots</rpm-snapshot-repository>
+        <rpm-release-repository>http://nexus.dans.knaw.nl/repository/rpm-releases</rpm-release-repository>
 
         <!-- Debugging -->
         <exec-maven-plugin.version>1.4.0</exec-maven-plugin.version>

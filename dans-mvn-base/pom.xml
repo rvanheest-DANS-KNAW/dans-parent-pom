@@ -42,10 +42,8 @@
         <!-- Releasing to the DANS Maven repository -->
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
 
-        <snapshot-repository>http://maven-repo.dans.knaw.nl/repository/maven-snapshots</snapshot-repository>
-        <release-repository>http://maven-repo.dans.knaw.nl/repository/maven-releases</release-repository>
-        <snapshot-repository-test>http://dnexus.dans.knaw.nl/repository/maven-snapshots</snapshot-repository-test>
-        <release-repository-test>http://dnexus.dans.knaw.nl/repository/maven-releases</release-repository-test>
+        <snapshot-repository>http://nexus.dans.knaw.nl/repository/maven-snapshots</snapshot-repository>
+        <release-repository>http://nexus.dans.knaw.nl/repository/maven-releases</release-repository>
     </properties>
     <scm>
         <developerConnection>scm:git:https://github.com/DANS-KNAW/${project.artifactId}</developerConnection>

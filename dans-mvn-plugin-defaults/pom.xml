@@ -84,11 +84,18 @@
     </properties>
     <repositories>
         <repository>
-            <id>DANS</id>
+            <id>dans-releases</id>
             <releases>
                 <enabled>true</enabled>
             </releases>
-            <url>http://maven.dans.knaw.nl/</url>
+            <url>http://maven.dans.knaw.nl/releases</url>
+        </repository>
+        <repository>
+            <id>dans-snapshots</id>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <url>http://maven.dans.knaw.nl/snapshots</url>
         </repository>
     </repositories>
     <dependencies>

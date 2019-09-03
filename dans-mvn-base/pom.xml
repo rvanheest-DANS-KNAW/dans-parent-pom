@@ -62,18 +62,6 @@
             <url>${release-repository}/</url>
         </repository>
     </distributionManagement>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>jcenter</id>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <url>http://jcenter.bintray.com</url>
-        </pluginRepository>
-    </pluginRepositories>
     <build>
         <plugins>
             <plugin>

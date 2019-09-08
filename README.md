@@ -9,7 +9,7 @@ SYNOPSIS
     <parent>
        <groupId>nl.knaw.dans.shared</groupId>
        <artifactId>dans-java-project</artifactId>
-       <version>4.0.0</version>
+       <version>...</version>
     </parent>
 
 or:
@@ -17,9 +17,10 @@ or:
     <parent>
        <groupId>nl.knaw.dans.shared</groupId>
        <artifactId>dans-scala-[(app|service)-]project</artifactId>
-       <version>4.0.0</version>
+       <version>...</version>
     </parent>
 
+(Fill in the current version.)
 
 DESCRIPTION
 -----------
@@ -129,7 +130,7 @@ This will look like the following. Note that the version in this example may not
         <parent>
             <groupId>nl.knaw.dans.shared</groupId>
             <artifactId>dans-scala-app-project</artifactId>
-            <version>4.0.0</version>
+            <version>...</version>
         </parent>
         <!-- ... -->
         <repositories>

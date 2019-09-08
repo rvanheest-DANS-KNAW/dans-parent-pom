@@ -54,9 +54,12 @@ The `maven-release-plugin` supports creating releases, which is subdivided into 
    that commit and deploying it to the `repository` specified in the POM's `<distributionManagement>`. 
    Command line: `mvn release:perform`. Note that this will invoke the `maven-deploy-plugin` in the last step.
    
-If you call the `maven-deploy-plugin` directly it will build a snapshot version and deploy the artifact to the 
-`snapshotRepository` as defined in the POM's `<distributionManagement>` element. Command line: `mvn deploy` (`deploy` is 
-actually [a Maven lifecycle phase](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html), so it
+If you call the `maven-deploy-plugin` directly it will build the current git working directory. It will create a snapshot or a release
+depending on whether the version in the POM is a snapshot version or a release version. Then it will be published to
+the appropriate Maven repo configured in the `<distributionManagement>`  element, so to `<snapshotRepository>` for snapshots
+and to `<repository>` for releases.
+
+Command line: `mvn deploy` (`deploy` is actually [a Maven lifecycle phase](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html), so it
 will cause Maven to execute all the phases leading up to it first).   
  
 #### Overrides for deploying RPMs
@@ -65,20 +68,20 @@ YUM. To support this, projects can override the default `maven-deploy-plugin`. T
 and `exec-maven-plugin`. These have been configured in `dans-mvn-plugin-defaults` to do the following during the deploy 
 phase:
 
-* Look under `target` for one RPM file
+* Look under `target` for one RPM file.
 * `PUT` that file to `${rpm-snapshot-repository}` or `${rpm-release-repository}`, depending on the version of the project
    being a snapshot version or not.
    
 These overrides are active for all non-POM-descendants of `dans-scala-app-project`. They have also been copied to certain
-legacy projects.
+legacy projects. Note that they do not use the `<distributionManagement>` element.
 
 #### Mixed Maven/RPM modules
 What if an RPM-module *also* needs to be published as a library to Maven? Actually, a project that requires this should be
 refactored to have two submodules: one for the lib and one for the RPM. For now, the default deploy behavior can be restored
 by activating the `lib-deploy` profile (defined in `dans-scala-app-project`). To avoid deploying RPMs to Maven, which is a
-waste of space, this should be combined with deactivating the `rpm` profile:
+waste of storage space, this should be combined with deactivating the `rpm` profile:
 
-`mvn -P'!rpm1' -Plib-deploy`
+`mvn -P'!rpm' -Plib-deploy`
 
 ### Design
 As of writing this, Maven is unfortunately still rather low in composability. This means that to split up a
@@ -108,22 +111,17 @@ POM                          | Description
 `dans-mvn-lib-defaults`      | Only managed dependency configurations.
 `dans-java-project`          | The basic dependencies and plug-ins needed for any DANS Java project.
 `dans-scala-project`         | The basic dependencies and plug-ins needed for any DANS Scala project.
-`dans-scala-app-project`     | The basic dependencies and plug-ins needed for a Scala based application.
-`dans-scala-service-project` | The basic dependencies and plug-ins needed for a Scala based service.
-
-Note that this means that only the projects with names ending in `-project` declare any dependencies or plug-ins actually inherited by your
-project. (Actually, `dans-mvn-base` also does, but it is one plug-in dependency you can easily ignore.)
+`dans-scala-app-project`     | The basic dependencies and plug-ins needed for a Scala based application or service including support for distributing to YUM.
 
 INSTALLATION AND CONFIGURATION
 ------------------------------
 To use these parents you need to add two thing to you POM file:
 
-* The parent project you want to inherit from. In most cases this should be `dans-scala-app-project` (for command-line only applications),
-  `dans-scala-service-project` (for daemons) or `dans-java-project` (for Java-based projects). However, you can also use one of the parents
+* The parent project you want to inherit from. In most cases this should be `dans-scala-app-project` or `dans-java-project`. However, you can also use one of the parents
   higher up in the inheritance tree.
 * The DANS Maven repositories.
 
-This will look like the following. Note that the version in this example may not be the latest available version.
+This will look like the following. Note that you must first fill in the appropriate version.
 
     <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
@@ -135,27 +133,34 @@ This will look like the following. Note that the version in this example may not
         <!-- ... -->
         <repositories>
             <repository>
-                <id>DANS</id>
+                <id>dans-releases</id>
                 <releases>
                     <enabled>true</enabled>
                 </releases>
-                <url>http://maven.dans.knaw.nl/</url>
+                <snapshots>
+                    <enabled>false</enabled>
+                </snapshots>
+                <url>https://maven.dans.knaw.nl/releases/</url>
             </repository>
-        </repositories>
-        <pluginRepositories>
-            <pluginRepository>
-                <id>DANS</id>
+            <repository>
+                <id>dans-snapshots</id>
                 <releases>
-                    <enabled>true</enabled>
+                    <enabled>false</enabled>
                 </releases>
-                <url>http://maven.dans.knaw.nl/</url>
-            </pluginRepository>
-        </pluginRepositories>
+                <snapshots>
+                    <enabled>true</enabled>
+                </snapshots>
+                <url>https://maven.dans.knaw.nl/snapshots/</url>
+            </repository>
+         </repositories>
         <!-- ... -->
     </project>
 
 You may in some cases want to extend the plug-in configurations that you inherited. You can often selectively override or append to the configuration
-declared in the parent, using the `combine.*` attributes. See for an example the `pom.xml` file in `dans-scala-service-project`.
+declared in the parent, using the `combine.*` attributes. (See [the Maven POM reference](https://maven.apache.org/pom.html); search for the word "combine".)
+
+Currently, the DANS repositories don't host any plug-ins. Not entirely true: for a few legacy projects we host patched third-party plug-ins. In those
+cases the above `<repositories>`-element must be copied and adjusted to a `<pluginRepositories>` element as well.
 
 BUILDING FROM SOURCE
 --------------------

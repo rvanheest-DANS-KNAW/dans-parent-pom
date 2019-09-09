@@ -21,12 +21,12 @@
     <parent>
         <groupId>nl.knaw.dans.shared</groupId>
         <artifactId>dans-mvn-plugin-defaults</artifactId>
-        <version>4.0.1-SNAPSHOT</version>
+        <version>5.0.1-SNAPSHOT</version>
         <relativePath>../dans-mvn-plugin-defaults</relativePath>
     </parent>
     <artifactId>dans-mvn-lib-defaults</artifactId>
     <name>DANS Maven Project Library Defaults</name>
-    <version>4.0.1-SNAPSHOT</version>
+    <version>5.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <description>
         Defines the default configuration and version for libraries used in DANS projects.
@@ -51,6 +51,7 @@
         <slf4j.version>1.7.25</slf4j.version>
         <scala-logging.version>3.9.0</scala-logging.version>
         <sourcecode.version>0.1.8</sourcecode.version>
+        <logback-journal.version>0.3.0</logback-journal.version>
 
         <!-- Apache Commons -->
         <commons-io.version>2.4</commons-io.version>
@@ -109,15 +110,6 @@
         <jetty-mortbay.version>8.1.16.v20140903</jetty-mortbay.version>
 
     </properties>
-    <repositories>
-        <repository>
-            <id>DANS</id>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <url>http://maven.dans.knaw.nl/</url>
-        </repository>
-    </repositories>
     <dependencyManagement>
         <dependencies>
             <!-- Scala -->
@@ -192,6 +184,11 @@
                 <groupId>com.lihaoyi</groupId>
                 <artifactId>sourcecode_2.12</artifactId>
                 <version>${sourcecode.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.gnieh</groupId>
+                <artifactId>logback-journal</artifactId>
+                <version>${logback-journal.version}</version>
             </dependency>
 
             <!-- Apache Commons -->

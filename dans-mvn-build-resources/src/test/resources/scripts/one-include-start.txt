@@ -1,3 +1,0 @@
-#include <multi-line.txt>
-
-Only one include, at the start of file.

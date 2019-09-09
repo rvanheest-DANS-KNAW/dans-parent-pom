@@ -4,7 +4,7 @@
     <groupId>nl.knaw.dans.shared</groupId>
     <artifactId>dans-parent-pom</artifactId>
     <name>DANS Maven Parents Master Build</name>
-    <version>4.0.1-SNAPSHOT</version>
+    <version>5.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <scm>
         <developerConnection>scm:git:https://github.com/DANS-KNAW/${project.artifactId}</developerConnection>
@@ -28,6 +28,7 @@
                 <version>${maven-release-plugin.version}</version>
                 <configuration>
                     <tagNameFormat>v@{project.version}</tagNameFormat>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
                 </configuration>
             </plugin>
         </plugins>
@@ -36,10 +37,8 @@
         <module>dans-mvn-base</module>
         <module>dans-mvn-plugin-defaults</module>
         <module>dans-mvn-lib-defaults</module>
-        <module>dans-mvn-build-resources</module>
         <module>dans-scala-project</module>
         <module>dans-scala-app-project</module>
-        <module>dans-scala-service-project</module>
         <module>dans-java-project</module>
     </modules>
 </project>

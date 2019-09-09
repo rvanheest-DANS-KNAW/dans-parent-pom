@@ -22,12 +22,12 @@
     <parent>
         <groupId>nl.knaw.dans.shared</groupId>
         <artifactId>dans-mvn-lib-defaults</artifactId>
-        <version>4.0.1-SNAPSHOT</version>
+        <version>5.0.1-SNAPSHOT</version>
         <relativePath>../dans-mvn-lib-defaults</relativePath>
     </parent>
 
     <artifactId>dans-java-project</artifactId>
-    <version>4.0.1-SNAPSHOT</version>
+    <version>5.0.1-SNAPSHOT</version>
     <name>DANS Java Project</name>
     <description>
         A bare bones Java-based project.
@@ -37,15 +37,6 @@
         <developerConnection>scm:git:https://github.com/DANS-KNAW/${project.artifactId}</developerConnection>
         <tag>HEAD</tag>
     </scm>
-    <repositories>
-        <repository>
-            <id>DANS</id>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <url>http://maven.dans.knaw.nl/</url>
-        </repository>
-    </repositories>
     <dependencies>
         <dependency>
             <groupId>org.slf4j</groupId>

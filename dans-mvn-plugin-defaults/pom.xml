@@ -21,12 +21,12 @@
     <parent>
         <groupId>nl.knaw.dans.shared</groupId>
         <artifactId>dans-mvn-base</artifactId>
-        <version>4.0.1-SNAPSHOT</version>
+        <version>5.0.1-SNAPSHOT</version>
         <relativePath>../dans-mvn-base</relativePath>
     </parent>
     <artifactId>dans-mvn-plugin-defaults</artifactId>
     <name>DANS Maven Project Plug-In Defaults</name>
-    <version>4.0.1-SNAPSHOT</version>
+    <version>5.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <description>
         Defines the default configuration and version for plug-ins used in DANS projects.
@@ -44,6 +44,7 @@
         <scala-maven-plugin.version>4.0.2</scala-maven-plugin.version>
         <kind-projector-compiler-plugin.version>0.10.3</kind-projector-compiler-plugin.version>
         <scalatest-maven-plugin.version>1.0</scalatest-maven-plugin.version>
+        <dans-mvn-build-resources.version>4.0.0</dans-mvn-build-resources.version>
 
         <!-- Building binaries and source packages -->
         <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
@@ -64,10 +65,8 @@
         <maven-assembly-plugin.version>3.0.0</maven-assembly-plugin.version>
 
         <!-- Distributing installables -->
-        <rpm-snapshot-repository>http://maven-repo.dans.knaw.nl/repository/rpm-snapshots</rpm-snapshot-repository>
-        <rpm-release-repository>http://maven-repo.dans.knaw.nl/repository/rpm-releases</rpm-release-repository>
-        <rpm-snapshot-repository-test>http://dnexus.dans.knaw.nl/repository/rpm-snapshots</rpm-snapshot-repository-test>
-        <rpm-release-repository-test>http://dnexus.dans.knaw.nl/repository/rpm-releases</rpm-release-repository-test>
+        <rpm-snapshot-repository>http://nexus.dans.knaw.nl/repository/rpm-snapshots</rpm-snapshot-repository>
+        <rpm-release-repository>http://nexus.dans.knaw.nl/repository/rpm-releases</rpm-release-repository>
 
         <!-- Debugging -->
         <exec-maven-plugin.version>1.4.0</exec-maven-plugin.version>
@@ -85,11 +84,24 @@
     </properties>
     <repositories>
         <repository>
-            <id>DANS</id>
+            <id>dans-releases</id>
             <releases>
                 <enabled>true</enabled>
             </releases>
-            <url>http://maven.dans.knaw.nl/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <url>https://maven.dans.knaw.nl/releases/</url>
+        </repository>
+        <repository>
+            <id>dans-snapshots</id>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <url>https://maven.dans.knaw.nl/snapshots/</url>
         </repository>
     </repositories>
     <dependencies>

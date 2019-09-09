@@ -22,12 +22,12 @@
     <parent>
         <groupId>nl.knaw.dans.shared</groupId>
         <artifactId>dans-mvn-lib-defaults</artifactId>
-        <version>4.0.1-SNAPSHOT</version>
+        <version>5.0.1-SNAPSHOT</version>
         <relativePath>../dans-mvn-lib-defaults</relativePath>
     </parent>
 
     <artifactId>dans-scala-project</artifactId>
-    <version>4.0.1-SNAPSHOT</version>
+    <version>5.0.1-SNAPSHOT</version>
     <name>DANS Scala Project</name>
     <description>
         A bare bones Scala-based project. The best choice when creating a Scala based library.
@@ -38,15 +38,6 @@
         <tag>HEAD</tag>
     </scm>
     <packaging>pom</packaging>
-    <repositories>
-        <repository>
-            <id>DANS</id>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <url>http://maven.dans.knaw.nl/</url>
-        </repository>
-    </repositories>
     <dependencies>
         <dependency>
             <groupId>org.scala-lang</groupId>

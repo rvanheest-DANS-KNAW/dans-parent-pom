@@ -21,7 +21,7 @@
     <groupId>nl.knaw.dans.shared</groupId>
     <artifactId>dans-mvn-base</artifactId>
     <name>DANS Maven Project Basic Settings</name>
-    <version>4.0.1-SNAPSHOT</version>
+    <version>5.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <description>
         Parent project for all DANS Maven-based projects.
@@ -42,10 +42,8 @@
         <!-- Releasing to the DANS Maven repository -->
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
 
-        <snapshot-repository>http://maven-repo.dans.knaw.nl/repository/maven-snapshots</snapshot-repository>
-        <release-repository>http://maven-repo.dans.knaw.nl/repository/maven-releases</release-repository>
-        <snapshot-repository-test>http://dnexus.dans.knaw.nl/repository/maven-snapshots</snapshot-repository-test>
-        <release-repository-test>http://dnexus.dans.knaw.nl/repository/maven-releases</release-repository-test>
+        <snapshot-repository>http://nexus.dans.knaw.nl/repository/maven-snapshots</snapshot-repository>
+        <release-repository>http://nexus.dans.knaw.nl/repository/maven-releases</release-repository>
     </properties>
     <scm>
         <developerConnection>scm:git:https://github.com/DANS-KNAW/${project.artifactId}</developerConnection>
@@ -64,18 +62,6 @@
             <url>${release-repository}/</url>
         </repository>
     </distributionManagement>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>jcenter</id>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <url>http://jcenter.bintray.com</url>
-        </pluginRepository>
-    </pluginRepositories>
     <build>
         <plugins>
             <plugin>

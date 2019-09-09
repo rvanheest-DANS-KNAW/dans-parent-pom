@@ -59,7 +59,6 @@
         <commons-lang.version>2.6</commons-lang.version>
         <commons-configuration.version>1.10</commons-configuration.version>
         <commons-csv.version>1.1</commons-csv.version>
-        <commons-daemon.version>1.0.15</commons-daemon.version>
         <commons-dbcp2.version>2.1.1</commons-dbcp2.version>
         <commons-compress.version>1.18</commons-compress.version>
         <commons-fileupload.version>1.4</commons-fileupload.version>
@@ -216,11 +215,6 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-csv</artifactId>
                 <version>${commons-csv.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>commons-daemon</groupId>
-                <artifactId>commons-daemon</artifactId>
-                <version>${commons-daemon.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>

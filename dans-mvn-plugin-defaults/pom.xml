@@ -109,6 +109,7 @@
             <groupId>nl.knaw.dans.shared</groupId>
             <artifactId>dans-mvn-build-resources</artifactId>
             <version>${dans-mvn-build-resources.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
     <build>

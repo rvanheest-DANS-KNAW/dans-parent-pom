@@ -104,13 +104,6 @@
             <url>https://maven.dans.knaw.nl/snapshots/</url>
         </repository>
     </repositories>
-    <dependencies>
-        <dependency>
-            <groupId>nl.knaw.dans.shared</groupId>
-            <artifactId>dans-mvn-build-resources</artifactId>
-            <version>${dans-mvn-build-resources.version}</version>
-        </dependency>
-    </dependencies>
     <build>
         <pluginManagement>
             <plugins>

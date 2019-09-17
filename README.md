@@ -81,7 +81,7 @@ refactored to have two submodules: one for the lib and one for the RPM. For now,
 by activating the `lib-deploy` profile (defined in `dans-scala-app-project`). To avoid deploying RPMs to Maven, which is a
 waste of storage space, this should be combined with deactivating the `rpm` profile:
 
-`mvn -P'!rpm' -Plib-deploy`
+`mvn -P'!rpm' -Plib-deploy deploy`
 
 ### Design
 As of writing this, Maven is unfortunately still rather low in composability. This means that to split up a

@@ -71,6 +71,7 @@
         <!-- HTTP server support -->
         <jetty.version>9.4.18.v20190429</jetty.version>
         <scalatra.version>2.6.3</scalatra.version>
+        <guava.version>28.1-jre</guava.version>
 
         <!-- Database connectivity -->
         <postgresql.version>9.4-1205-jdbc42</postgresql.version>
@@ -256,7 +257,6 @@
                 <artifactId>jetty-server</artifactId>
                 <version>${jetty.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-ajp</artifactId>
@@ -286,6 +286,11 @@
                 <groupId>org.scalatra</groupId>
                 <artifactId>scalatra-auth_2.12</artifactId>
                 <version>${scalatra.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
             </dependency>
 
             <!-- Database connectivity -->

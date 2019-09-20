@@ -3,3 +3,5 @@
 /.idea
 /*.iml
 /*/*.iml
+/pom.xml.versionsBackup
+/*/pom.xml.versionsBackup

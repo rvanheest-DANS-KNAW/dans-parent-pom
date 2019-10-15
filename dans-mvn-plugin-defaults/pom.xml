@@ -21,19 +21,19 @@
     <parent>
         <groupId>nl.knaw.dans.shared</groupId>
         <artifactId>dans-mvn-base</artifactId>
-        <version>5.1.2-SNAPSHOT</version>
+        <version>5.1.2</version>
         <relativePath>../dans-mvn-base</relativePath>
     </parent>
     <artifactId>dans-mvn-plugin-defaults</artifactId>
     <name>DANS Maven Project Plug-In Defaults</name>
-    <version>5.1.2-SNAPSHOT</version>
+    <version>5.1.2</version>
     <packaging>pom</packaging>
     <description>
         Defines the default configuration and version for plug-ins used in DANS projects.
     </description>
     <scm>
         <developerConnection>scm:git:https://github.com/DANS-KNAW/${project.artifactId}</developerConnection>
-        <tag>HEAD</tag>
+        <tag>v5.1.2</tag>
     </scm>
     <properties>
         <!-- Build resources support -->

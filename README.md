@@ -1,6 +1,7 @@
 DANS Maven Parents
 ==================
 [![Build Status](https://travis-ci.org/DANS-KNAW/dans-parent-pom.png?branch=master)](https://travis-ci.org/DANS-KNAW/dans-parent-pom)
+
 Parents for DANS Maven based projects.
 
 

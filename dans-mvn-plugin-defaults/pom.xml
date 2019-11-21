@@ -37,14 +37,13 @@
     </scm>
     <properties>
         <!-- Build resources support -->
-        <dans-mvn-build-resources.version>4.0.0</dans-mvn-build-resources.version>
+        <dans-mvn-build-resources.version>4.0.1</dans-mvn-build-resources.version>
         <maven-dependency-plugin.version>3.0.2</maven-dependency-plugin.version>
         <scala.version>2.12.3</scala.version>
         <scala.binary.version>2.12</scala.binary.version>
         <scala-maven-plugin.version>3.4.6</scala-maven-plugin.version>
         <kind-projector-compiler-plugin.version>0.9.9</kind-projector-compiler-plugin.version>
         <scalatest-maven-plugin.version>1.0</scalatest-maven-plugin.version>
-        <dans-mvn-build-resources.version>4.0.0</dans-mvn-build-resources.version>
 
         <!-- Building binaries and source packages -->
         <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>

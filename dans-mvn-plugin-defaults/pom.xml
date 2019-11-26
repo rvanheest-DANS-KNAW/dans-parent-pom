@@ -415,6 +415,16 @@
                                     </softlinkSource>
                                 </sources>
                             </mapping>
+                            <defineStatements>
+                                <!--
+                                    To prevent the following problem from occurring:
+                                    https://github.com/DANS-KNAW/easy-dtap#problem-building-rpm
+
+                                    Somehow this macro was not defined on some developers' systems and they had to work around it by
+                                    defining it in ~/.rpmmacros. This should no longer be necessary.
+                                -->
+                                <defineStatement>_tmppath %{_topdir}/BUILD</defineStatement>
+                            </defineStatements>
                         </mappings>
                         <!-- Build-time scripts -->
                         <prepareScriptlet>

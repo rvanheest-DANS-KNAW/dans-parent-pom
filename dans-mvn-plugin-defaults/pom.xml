@@ -56,7 +56,7 @@
 
         <!-- Assembling installables -->
         <maven-antrun-plugin.version>1.8</maven-antrun-plugin.version>
-        <rpm-maven-plugin.version>2.1.5</rpm-maven-plugin.version>
+        <rpm-maven-plugin.version>2.2.0</rpm-maven-plugin.version>
         <rpm-release /><!-- Only declared here, override on the command line if you need a custom release for the RPM -->
         <dans-provider-name>dans.knaw.nl</dans-provider-name>
         <rpm-replace-configuration>true</rpm-replace-configuration> <!-- Change to noreplace  if you want to support automatically upgrading config files in post install scripts -->
@@ -415,17 +415,18 @@
                                     </softlinkSource>
                                 </sources>
                             </mapping>
-                            <defineStatements>
-                                <!--
-                                    To prevent the following problem from occurring:
-                                    https://github.com/DANS-KNAW/easy-dtap#problem-building-rpm
-
-                                    Somehow this macro was not defined on some developers' systems and they had to work around it by
-                                    defining it in ~/.rpmmacros. This should no longer be necessary.
-                                -->
-                                <defineStatement>_tmppath %{_topdir}/BUILD</defineStatement>
-                            </defineStatements>
                         </mappings>
+                        <defineStatements>
+                            <!--
+                                To prevent the following problem from occurring:
+                                https://github.com/DANS-KNAW/easy-dtap#problem-building-rpm
+
+                                Somehow this macro was not defined on some developers' systems and they had to work around it by
+                                defining it in ~/.rpmmacros. This should no longer be necessary.
+                            -->
+                            <defineStatement>_tmppath %{_topdir}/BUILD</defineStatement>
+                        </defineStatements>
+
                         <!-- Build-time scripts -->
                         <prepareScriptlet>
                             <scriptFile>target/dans-rpm-scripts/build-0-prepare.sh</scriptFile>

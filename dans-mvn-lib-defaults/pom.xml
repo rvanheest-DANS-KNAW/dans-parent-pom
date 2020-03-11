@@ -21,12 +21,12 @@
     <parent>
         <groupId>nl.knaw.dans.shared</groupId>
         <artifactId>dans-mvn-plugin-defaults</artifactId>
-        <version>5.1.7-SNAPSHOT</version>
+        <version>6.0.0-SNAPSHOT</version>
         <relativePath>../dans-mvn-plugin-defaults</relativePath>
     </parent>
     <artifactId>dans-mvn-lib-defaults</artifactId>
     <name>DANS Maven Project Library Defaults</name>
-    <version>5.1.7-SNAPSHOT</version>
+    <version>6.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <description>
         Defines the default configuration and version for libraries used in DANS projects.
@@ -37,68 +37,75 @@
     </scm>
     <properties>
         <!-- Scala -->
-        <scallop.version>3.1.5</scallop.version>
-        <scalarx.version>0.26.5</scalarx.version>
-        <scala-xml.version>1.1.1</scala-xml.version>
-        <scalaj-http.version>2.4.1</scalaj-http.version>
+        <scallop.version>3.4.0</scallop.version>
+        <scalarx.version>0.27.0</scalarx.version>
+        <scala-xml.version>1.2.0</scala-xml.version>
+        <scalaj-http.version>2.4.2</scalaj-http.version>
         <scala-arm.version>2.0</scala-arm.version>
-        <dans-scala-lib.version>1.4.1</dans-scala-lib.version>
-        <better-files.version>3.6.0</better-files.version>
-        <cats-core.version>1.5.0</cats-core.version>
+        <dans-scala-lib.version>1.6.2</dans-scala-lib.version>
+        <better-files.version>3.8.0</better-files.version>
+        <cats-core.version>2.1.1</cats-core.version>
 
         <!-- Logging -->
         <logback.version>1.2.3</logback.version>
-        <slf4j.version>1.7.25</slf4j.version>
-        <scala-logging.version>3.9.0</scala-logging.version>
-        <sourcecode.version>0.1.4</sourcecode.version>
+        <slf4j.version>1.7.30</slf4j.version>
+        <scala-logging.version>3.9.2</scala-logging.version>
+        <sourcecode.version>0.2.1</sourcecode.version>
         <logback-journal.version>0.3.0</logback-journal.version>
 
         <!-- Apache Commons -->
-        <commons-io.version>2.4</commons-io.version>
-        <commons-codec.version>1.10</commons-codec.version>
+        <commons-io.version>2.6</commons-io.version>
+        <commons-codec.version>1.14</commons-codec.version>
         <commons-lang.version>2.6</commons-lang.version>
         <commons-configuration.version>1.10</commons-configuration.version>
-        <commons-csv.version>1.1</commons-csv.version>
-        <commons-daemon.version>1.0.15</commons-daemon.version>
-        <commons-dbcp2.version>2.1.1</commons-dbcp2.version>
-        <commons-compress.version>1.19</commons-compress.version>
+        <commons-csv.version>1.8</commons-csv.version>
+        <commons-daemon.version>1.2.2</commons-daemon.version>
+        <commons-dbcp2.version>2.7.0</commons-dbcp2.version>
+        <commons-compress.version>1.20</commons-compress.version>
         <commons-fileupload.version>1.4</commons-fileupload.version>
 
         <!-- ISO 8601 datetime -->
-        <joda-time.version>2.7</joda-time.version>
-        <joda-convert.version>1.6</joda-convert.version>
+        <joda-time.version>2.10.5</joda-time.version>
+        <joda-convert.version>2.2.1</joda-convert.version>
 
         <!-- HTTP server support -->
         <jetty.version>9.4.18.v20190429</jetty.version>
-        <scalatra.version>2.6.3</scalatra.version>
-        <guava.version>28.1-jre</guava.version>
+        <javax-servlet-api.version>4.0.1</javax-servlet-api.version>
+        <scalatra.version>2.6.5</scalatra.version>
+        <guava.version>28.2-jre</guava.version>
+        <velocity.version>1.7</velocity.version>
 
         <!-- Database connectivity -->
-        <postgresql.version>9.4-1205-jdbc42</postgresql.version>
-        <sqlite.version>3.21.0</sqlite.version>
-        <hsqldb.version>2.4.1</hsqldb.version>
-        <hibernate.version>4.3.11.Final</hibernate.version>
+        <postgresql.version>42.2.11.jre7</postgresql.version>
+        <sqlite.version>3.30.1</sqlite.version>
+        <hsqldb.version>2.5.0</hsqldb.version>
+        <hibernate.version>5.4.12.Final</hibernate.version>
+        <solr4j.version>8.4.1</solr4j.version>
 
         <!-- Formats -->
-        <bagit.version>5.1.1</bagit.version>
-        <zip4j.version>1.3.2</zip4j.version>
-        <jgit.version>4.1.0.201509280440-r</jgit.version>
-        <json4s.version>3.5.3</json4s.version>
-        <tika.version>1.22</tika.version>
+        <bagit.version>5.2.0</bagit.version>
+        <zip4j.version>2.5.0</zip4j.version>
+        <jgit.version>5.7.0.202003090808-r</jgit.version>
+        <json4s.version>3.7.0-M2</json4s.version>
+        <tika.version>1.23</tika.version>
+        <dans-bag-lib.version>1.0.0</dans-bag-lib.version>
+        <jaxen.version>1.2.0-atlassian-2</jaxen.version>
 
         <!-- Unit testing -->
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13</junit.version>
         <junit-addons.version>1.4</junit-addons.version>
-        <easymock.version>3.1</easymock.version>
-        <powermock.version>1.6.2</powermock.version>
+        <easymock.version>4.2</easymock.version>
+        <powermock.version>2.0.5</powermock.version>
+        <mockwebserver.version>4.4.1</mockwebserver.version>
         <hamcrest.version>1.3</hamcrest.version>
-        <scala-test.version>3.0.5</scala-test.version>
-        <scalamock.version>4.1.0</scalamock.version>
-        <scalacheck.version>1.14.0</scalacheck.version>
-        <cats-scalatest.version>2.4.0</cats-scalatest.version>
+        <!-- Do not update untill this issue is resolved: https://github.com/scalatest/scalatest/issues/1734 -->
+        <scala-test.version>3.0.8</scala-test.version> 
+        <scalamock.version>4.4.0</scalamock.version>
+        <scalacheck.version>1.14.3</scalacheck.version>
+        <cats-scalatest.version>3.0.5</cats-scalatest.version>
 
         <!-- LEGACY -->
-        <spring.version>5.1.1.RELEASE</spring.version>
+        <spring.version>5.2.4.RELEASE</spring.version>
         <yourmediashelf.version>0.7</yourmediashelf.version>
         <!--
             According to mvnrepository.com the eclipse branch of jetty is the "current" one.
@@ -162,6 +169,11 @@
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>jcl-over-slf4j</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>jul-to-slf4j</artifactId>
                 <version>${slf4j.version}</version>
             </dependency>
             <dependency>
@@ -268,6 +280,11 @@
                 <version>${jetty.version}</version>
             </dependency>
             <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${javax-servlet-api.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.scalaj</groupId>
                 <artifactId>scalaj-http_2.12</artifactId>
                 <version>${scalaj-http.version}</version>
@@ -292,6 +309,11 @@
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity</artifactId>
+                <version>${velocity.version}</version>
+            </dependency>
 
             <!-- Database connectivity -->
             <dependency>
@@ -313,6 +335,11 @@
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-core</artifactId>
                 <version>${hibernate.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.solr</groupId>
+                <artifactId>solr-solrj</artifactId>
+                <version>${solr4j.version}</version>
             </dependency>
 
             <!-- Formats -->
@@ -346,6 +373,16 @@
                 <artifactId>tika-core</artifactId>
                 <version>${tika.version}</version>
             </dependency>
+            <dependency>
+                <groupId>nl.knaw.dans.lib</groupId>
+                <artifactId>dans-bag-lib_2.12</artifactId>
+                <version>${dans-bag-lib.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jaxen</groupId>
+                <artifactId>jaxen</artifactId>
+                <version>${jaxen.version}</version>
+            </dependency>
 
             <!-- Unit testing -->
             <dependency>
@@ -371,6 +408,11 @@
                 <artifactId>powermock-module-junit4-rule</artifactId>
                 <version>${powermock.version}</version>
                 <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>mockwebserver</artifactId>
+                <version>${mockwebserver.version}</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>

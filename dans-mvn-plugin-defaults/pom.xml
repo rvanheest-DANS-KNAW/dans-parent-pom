@@ -21,12 +21,12 @@
     <parent>
         <groupId>nl.knaw.dans.shared</groupId>
         <artifactId>dans-mvn-base</artifactId>
-        <version>5.1.7-SNAPSHOT</version>
+        <version>6.0.0-SNAPSHOT</version>
         <relativePath>../dans-mvn-base</relativePath>
     </parent>
     <artifactId>dans-mvn-plugin-defaults</artifactId>
     <name>DANS Maven Project Plug-In Defaults</name>
-    <version>5.1.7-SNAPSHOT</version>
+    <version>6.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <description>
         Defines the default configuration and version for plug-ins used in DANS projects.
@@ -38,20 +38,20 @@
     <properties>
         <!-- Build resources support -->
         <dans-mvn-build-resources.version>4.0.1</dans-mvn-build-resources.version>
-        <maven-dependency-plugin.version>3.0.2</maven-dependency-plugin.version>
-        <scala.version>2.12.3</scala.version>
+        <maven-dependency-plugin.version>3.1.1</maven-dependency-plugin.version>
+        <scala.version>2.12.10</scala.version>
         <scala.binary.version>2.12</scala.binary.version>
-        <scala-maven-plugin.version>3.4.6</scala-maven-plugin.version>
-        <kind-projector-compiler-plugin.version>0.9.9</kind-projector-compiler-plugin.version>
-        <scalatest-maven-plugin.version>1.0</scalatest-maven-plugin.version>
+        <scala-maven-plugin.version>4.3.1</scala-maven-plugin.version>
+        <kind-projector-compiler-plugin.version>0.11.0</kind-projector-compiler-plugin.version>
+        <scalatest-maven-plugin.version>2.0.0</scalatest-maven-plugin.version>
 
         <!-- Building binaries and source packages -->
-        <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <java.version>1.6</java.version><!-- Still using Java 1.6 as default, for legacy projects -->
-        <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
-        <maven-jar-plugin.version>2.4</maven-jar-plugin.version>
-        <maven-war-plugin.version>2.6</maven-war-plugin.version>
-        <maven-surefire-plugin.version>2.21.0</maven-surefire-plugin.version>
+        <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
+        <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
+        <maven-war-plugin.version>3.2.3</maven-war-plugin.version>
+        <maven-surefire-plugin.version>3.0.0-M4</maven-surefire-plugin.version>
         <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
 
         <!-- Assembling installables -->
@@ -61,25 +61,25 @@
         <dans-provider-name>dans.knaw.nl</dans-provider-name>
         <rpm-replace-configuration>true</rpm-replace-configuration> <!-- Change to noreplace  if you want to support automatically upgrading config files in post install scripts -->
         <main-class>NoMainClass</main-class><!-- Only a placeholder is declared here. The inheriting project should fill in the FQN of the main class -->
-        <maven-assembly-plugin.version>3.0.0</maven-assembly-plugin.version>
+        <maven-assembly-plugin.version>3.2.0</maven-assembly-plugin.version>
 
         <!-- Distributing installables -->
         <rpm-snapshot-repository>http://nexus.dans.knaw.nl/repository/rpm-snapshots</rpm-snapshot-repository>
         <rpm-release-repository>http://nexus.dans.knaw.nl/repository/rpm-releases</rpm-release-repository>
 
         <!-- Debugging -->
-        <exec-maven-plugin.version>1.4.0</exec-maven-plugin.version>
+        <exec-maven-plugin.version>1.6.0</exec-maven-plugin.version>
 
         <!-- Static code analysis -->
         <scalastyle-maven-plugin.version>1.0.0</scalastyle-maven-plugin.version>
 
         <!-- Legacy -->
-        <aspectj-maven-plugin.version>1.4</aspectj-maven-plugin.version>
-        <build-helper-maven-plugin.version>1.8</build-helper-maven-plugin.version>
-        <maven-jibx-plugin.version>1.2.5</maven-jibx-plugin.version>
-        <maven-javadoc-plugin.version>2.10.3</maven-javadoc-plugin.version>
+        <aspectj-maven-plugin.version>1.11</aspectj-maven-plugin.version>
+        <build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
+        <maven-jibx-plugin.version>1.3.1</maven-jibx-plugin.version>
+        <maven-javadoc-plugin.version>3.1.1</maven-javadoc-plugin.version>
         <maven-java-formatter-plugin.version>0.4</maven-java-formatter-plugin.version>
-        <maven-site-plugin.version>3.7</maven-site-plugin.version>
+        <maven-site-plugin.version>3.8.2</maven-site-plugin.version>
     </properties>
     <repositories>
         <repository>
@@ -185,8 +185,8 @@
                         </args>
                         <compilerPlugins>
                             <compilerPlugin>
-                                <groupId>org.spire-math</groupId>
-                                <artifactId>kind-projector_2.12</artifactId>
+                                <groupId>org.typelevel</groupId>
+                                <artifactId>kind-projector_2.12.10</artifactId>
                                 <version>${kind-projector-compiler-plugin.version}</version>
                             </compilerPlugin>
                         </compilerPlugins>
@@ -420,13 +420,11 @@
                             <!--
                                 To prevent the following problem from occurring:
                                 https://github.com/DANS-KNAW/easy-dtap#problem-building-rpm
-
                                 Somehow this macro was not defined on some developers' systems and they had to work around it by
                                 defining it in ~/.rpmmacros. This should no longer be necessary.
                             -->
                             <defineStatement>_tmppath %{_topdir}/BUILD</defineStatement>
                         </defineStatements>
-
                         <!-- Build-time scripts -->
                         <prepareScriptlet>
                             <scriptFile>target/dans-rpm-scripts/build-0-prepare.sh</scriptFile>

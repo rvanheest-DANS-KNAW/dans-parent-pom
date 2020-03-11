@@ -164,6 +164,16 @@ declared in the parent, using the `combine.*` attributes. (See [the Maven POM re
 Currently, the DANS repositories don't host any plug-ins. Not entirely true: for a few legacy projects we host patched third-party plug-ins. In those
 cases the above `<repositories>`-element must be copied and adjusted to a `<pluginRepositories>` element as well.
 
+HANDLING CIRCULAR DEPENDENCIES
+------------------------------
+It can happen that a dependency is included in one of the parent POMs, that also inherits from the same parent pom. Currently this is the case for `dans-scala-lib` and `dans-bag-lib`. To avoid redundant deploys, these circular dependencies should be handled as follows:
+
+1. Test that the `SNAPSHOT` version of the parent POM with reference to the latest `SNAPSHOT` version of the dependency is behaving as expected.
+2. In the parent POM, change the version number for the dependency to the next (not yet deployed) release version.
+3. Release `dans-parent-pom` and deploy it to the Maven repository.
+4. In the dependency's POM, change the parent POM version number to the newly deployed version of `dans-parent-pom`.
+5. Build and deploy the inheriting project.
+
 BUILDING FROM SOURCE
 --------------------
 Prerequisites:

@@ -22,12 +22,12 @@
     <parent>
         <groupId>nl.knaw.dans.shared</groupId>
         <artifactId>dans-scala-project</artifactId>
-        <version>5.1.7-SNAPSHOT</version>
+        <version>6.0.0-SNAPSHOT</version>
         <relativePath>../dans-scala-project</relativePath>
     </parent>
 
     <artifactId>dans-scala-app-project</artifactId>
-    <version>5.1.7-SNAPSHOT</version>
+    <version>6.0.0-SNAPSHOT</version>
     <name>DANS Scala Application Project</name>
     <packaging>pom</packaging>
     <scm>

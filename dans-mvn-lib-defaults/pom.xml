@@ -89,7 +89,7 @@
         <json4s.version>3.7.0-M2</json4s.version>
         <tika.version>1.23</tika.version>
         <dans-bag-lib.version>1.0.0</dans-bag-lib.version>
-        <jaxen.version>1.2.0-atlassian-2</jaxen.version>
+        <jaxen.version>1.2.0</jaxen.version>
 
         <!-- Unit testing -->
         <junit.version>4.13</junit.version>

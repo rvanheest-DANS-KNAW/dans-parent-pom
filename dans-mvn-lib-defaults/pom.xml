@@ -42,7 +42,7 @@
         <scala-xml.version>1.2.0</scala-xml.version>
         <scalaj-http.version>2.4.2</scalaj-http.version>
         <scala-arm.version>2.0</scala-arm.version>
-        <dans-scala-lib.version>1.6.2</dans-scala-lib.version>
+        <dans-scala-lib.version>1.6.3</dans-scala-lib.version>
         <better-files.version>3.8.0</better-files.version>
         <cats-core.version>2.1.1</cats-core.version>
 
@@ -71,41 +71,41 @@
         <!-- HTTP server support -->
         <jetty.version>9.4.18.v20190429</jetty.version>
         <javax-servlet-api.version>4.0.1</javax-servlet-api.version>
-        <scalatra.version>2.6.5</scalatra.version>
+        <scalatra.version>2.7.0</scalatra.version>
         <guava.version>28.2-jre</guava.version>
         <velocity.version>1.7</velocity.version>
 
         <!-- Database connectivity -->
-        <postgresql.version>42.2.11.jre7</postgresql.version>
+        <postgresql.version>42.2.12.jre7</postgresql.version>
         <sqlite.version>3.30.1</sqlite.version>
         <hsqldb.version>2.5.0</hsqldb.version>
         <hibernate.version>5.4.12.Final</hibernate.version>
-        <solr4j.version>8.4.1</solr4j.version>
+        <solr4j.version>8.5.0</solr4j.version>
 
         <!-- Formats -->
         <bagit.version>5.2.0</bagit.version>
-        <zip4j.version>2.5.0</zip4j.version>
-        <jgit.version>5.7.0.202003090808-r</jgit.version>
+        <zip4j.version>2.5.1</zip4j.version>
+        <jgit.version>5.7.0.202003110725-r</jgit.version>
         <json4s.version>3.7.0-M2</json4s.version>
-        <tika.version>1.23</tika.version>
-        <dans-bag-lib.version>1.0.0</dans-bag-lib.version>
+        <tika.version>1.24</tika.version>
+        <dans-bag-lib.version>1.0.1</dans-bag-lib.version>
         <jaxen.version>1.2.0</jaxen.version>
 
         <!-- Unit testing -->
         <junit.version>4.13</junit.version>
         <junit-addons.version>1.4</junit-addons.version>
         <easymock.version>4.2</easymock.version>
-        <powermock.version>2.0.5</powermock.version>
+        <powermock.version>2.0.7</powermock.version>
         <mockwebserver.version>4.4.1</mockwebserver.version>
         <hamcrest.version>1.3</hamcrest.version>
-        <!-- Do not update untill this issue is resolved: https://github.com/scalatest/scalatest/issues/1734 -->
-        <scala-test.version>3.0.8</scala-test.version> 
+        <scala-test.version>3.1.1</scala-test.version> 
         <scalamock.version>4.4.0</scalamock.version>
         <scalacheck.version>1.14.3</scalacheck.version>
+        <scalatestplus-check.version>3.1.0.0-RC2</scalatestplus-check.version>
         <cats-scalatest.version>3.0.5</cats-scalatest.version>
 
         <!-- LEGACY -->
-        <spring.version>5.2.4.RELEASE</spring.version>
+        <spring.version>5.2.5.RELEASE</spring.version>
         <yourmediashelf.version>0.7</yourmediashelf.version>
         <!--
             According to mvnrepository.com the eclipse branch of jetty is the "current" one.
@@ -448,6 +448,12 @@
                 <groupId>org.scalacheck</groupId>
                 <artifactId>scalacheck_2.12</artifactId>
                 <version>${scalacheck.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.scalatestplus</groupId>
+                <artifactId>scalatestplus-scalacheck_2.12</artifactId>
+                <version>${scalatestplus-check.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>

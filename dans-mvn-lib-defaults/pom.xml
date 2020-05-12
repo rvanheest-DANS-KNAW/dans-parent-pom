@@ -21,19 +21,19 @@
     <parent>
         <groupId>nl.knaw.dans.shared</groupId>
         <artifactId>dans-mvn-plugin-defaults</artifactId>
-        <version>6.0.3</version>
+        <version>6.0.4-SNAPSHOT</version>
         <relativePath>../dans-mvn-plugin-defaults</relativePath>
     </parent>
     <artifactId>dans-mvn-lib-defaults</artifactId>
     <name>DANS Maven Project Library Defaults</name>
-    <version>6.0.3</version>
+    <version>6.0.4-SNAPSHOT</version>
     <packaging>pom</packaging>
     <description>
         Defines the default configuration and version for libraries used in DANS projects.
     </description>
     <scm>
         <developerConnection>scm:git:https://github.com/DANS-KNAW/${project.artifactId}</developerConnection>
-        <tag>v6.0.3</tag>
+        <tag>HEAD</tag>
     </scm>
     <properties>
         <!-- Scala -->

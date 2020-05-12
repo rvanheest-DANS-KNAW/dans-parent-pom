@@ -39,10 +39,10 @@
         <!-- Scala -->
         <scallop.version>3.4.0</scallop.version>
         <scalarx.version>0.27.0</scalarx.version>
-        <scala-xml.version>1.2.0</scala-xml.version>
+        <scala-xml.version>1.3.0</scala-xml.version>
         <scalaj-http.version>2.4.2</scalaj-http.version>
         <scala-arm.version>2.0</scala-arm.version>
-        <dans-scala-lib.version>1.6.3</dans-scala-lib.version>
+        <dans-scala-lib.version>1.6.4</dans-scala-lib.version>
         <better-files.version>3.8.0</better-files.version>
         <cats-core.version>2.1.1</cats-core.version>
 
@@ -65,30 +65,30 @@
         <commons-fileupload.version>1.4</commons-fileupload.version>
 
         <!-- ISO 8601 datetime -->
-        <joda-time.version>2.10.5</joda-time.version>
+        <joda-time.version>2.10.6</joda-time.version>
         <joda-convert.version>2.2.1</joda-convert.version>
 
         <!-- HTTP server support -->
         <jetty.version>9.4.18.v20190429</jetty.version>
         <javax-servlet-api.version>4.0.1</javax-servlet-api.version>
         <scalatra.version>2.7.0</scalatra.version>
-        <guava.version>28.2-jre</guava.version>
+        <guava.version>29.0-jre</guava.version>
         <velocity.version>1.7</velocity.version>
 
         <!-- Database connectivity -->
         <postgresql.version>42.2.12.jre7</postgresql.version>
-        <sqlite.version>3.30.1</sqlite.version>
+        <sqlite.version>3.31.1</sqlite.version>
         <hsqldb.version>2.5.0</hsqldb.version>
         <hibernate.version>5.4.12.Final</hibernate.version>
-        <solr4j.version>8.5.0</solr4j.version>
+        <solr4j.version>8.5.1</solr4j.version>
 
         <!-- Formats -->
-        <bagit.version>5.2.0</bagit.version>
-        <zip4j.version>2.5.1</zip4j.version>
+        <bagit.version>5.4.0</bagit.version>
+        <zip4j.version>2.5.2</zip4j.version>
         <jgit.version>5.7.0.202003110725-r</jgit.version>
-        <json4s.version>3.7.0-M2</json4s.version>
-        <tika.version>1.24</tika.version>
-        <dans-bag-lib.version>1.0.1</dans-bag-lib.version>
+        <json4s.version>3.7.0-M4</json4s.version>
+        <tika.version>1.24.1</tika.version>
+        <dans-bag-lib.version>1.0.2</dans-bag-lib.version>
         <jaxen.version>1.2.0</jaxen.version>
 
         <!-- Unit testing -->
@@ -96,7 +96,7 @@
         <junit-addons.version>1.4</junit-addons.version>
         <easymock.version>4.2</easymock.version>
         <powermock.version>2.0.7</powermock.version>
-        <mockwebserver.version>4.4.1</mockwebserver.version>
+        <mockwebserver.version>4.6.0</mockwebserver.version>
         <hamcrest.version>1.3</hamcrest.version>
         <scala-test.version>3.1.1</scala-test.version> 
         <scalamock.version>4.4.0</scalamock.version>
@@ -105,7 +105,7 @@
         <cats-scalatest.version>3.0.5</cats-scalatest.version>
 
         <!-- LEGACY -->
-        <spring.version>5.2.5.RELEASE</spring.version>
+        <spring.version>5.2.6.RELEASE</spring.version>
         <yourmediashelf.version>0.7</yourmediashelf.version>
         <!--
             According to mvnrepository.com the eclipse branch of jetty is the "current" one.
@@ -344,7 +344,7 @@
 
             <!-- Formats -->
             <dependency>
-                <groupId>gov.loc</groupId>
+                <groupId>nl.knaw.dans</groupId>
                 <artifactId>bagit</artifactId>
                 <version>${bagit.version}</version>
             </dependency>

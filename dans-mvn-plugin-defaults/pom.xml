@@ -38,7 +38,7 @@
     <properties>
         <!-- Build resources support -->
         <dans-mvn-build-resources.version>4.0.1</dans-mvn-build-resources.version>
-        <maven-dependency-plugin.version>3.1.1</maven-dependency-plugin.version>
+        <maven-dependency-plugin.version>3.1.2</maven-dependency-plugin.version>
         <scala.version>2.12.10</scala.version>
         <scala.binary.version>2.12</scala.binary.version>
         <scala-maven-plugin.version>4.3.1</scala-maven-plugin.version>
@@ -55,13 +55,13 @@
         <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
 
         <!-- Assembling installables -->
-        <maven-antrun-plugin.version>1.8</maven-antrun-plugin.version>
+        <maven-antrun-plugin.version>3.0.0</maven-antrun-plugin.version>
         <rpm-maven-plugin.version>2.2.0</rpm-maven-plugin.version>
         <rpm-release /><!-- Only declared here, override on the command line if you need a custom release for the RPM -->
         <dans-provider-name>dans.knaw.nl</dans-provider-name>
         <rpm-replace-configuration>true</rpm-replace-configuration> <!-- Change to noreplace  if you want to support automatically upgrading config files in post install scripts -->
         <main-class>NoMainClass</main-class><!-- Only a placeholder is declared here. The inheriting project should fill in the FQN of the main class -->
-        <maven-assembly-plugin.version>3.2.0</maven-assembly-plugin.version>
+        <maven-assembly-plugin.version>3.3.0</maven-assembly-plugin.version>
 
         <!-- Distributing installables -->
         <rpm-snapshot-repository>http://nexus.dans.knaw.nl/repository/rpm-snapshots</rpm-snapshot-repository>
@@ -75,11 +75,11 @@
 
         <!-- Legacy -->
         <aspectj-maven-plugin.version>1.11</aspectj-maven-plugin.version>
-        <build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
+        <build-helper-maven-plugin.version>3.1.0</build-helper-maven-plugin.version>
         <maven-jibx-plugin.version>1.3.1</maven-jibx-plugin.version>
-        <maven-javadoc-plugin.version>3.1.1</maven-javadoc-plugin.version>
+        <maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
         <maven-java-formatter-plugin.version>0.4</maven-java-formatter-plugin.version>
-        <maven-site-plugin.version>3.8.2</maven-site-plugin.version>
+        <maven-site-plugin.version>3.9.0</maven-site-plugin.version>
     </properties>
     <repositories>
         <repository>
@@ -182,6 +182,7 @@
                             <arg>-target:jvm-1.8</arg>
                             <arg>-deprecation</arg>
                             <arg>-feature</arg>
+                            <arg>-Ypartial-unification</arg>
                         </args>
                         <compilerPlugins>
                             <compilerPlugin>

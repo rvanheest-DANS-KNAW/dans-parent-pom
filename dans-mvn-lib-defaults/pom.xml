@@ -79,7 +79,7 @@
         <postgresql.version>42.2.12.jre7</postgresql.version>
         <sqlite.version>3.31.1</sqlite.version>
         <hsqldb.version>2.5.0</hsqldb.version>
-        <hibernate.version>5.4.12.Final</hibernate.version>
+        <hibernate.version>5.4.14.Final</hibernate.version>
         <solr4j.version>8.5.1</solr4j.version>
 
         <!-- Formats -->
@@ -98,7 +98,7 @@
         <powermock.version>2.0.7</powermock.version>
         <mockwebserver.version>4.6.0</mockwebserver.version>
         <hamcrest.version>1.3</hamcrest.version>
-        <scala-test.version>3.1.1</scala-test.version> 
+        <scala-test.version>3.1.1</scala-test.version>
         <scalamock.version>4.4.0</scalamock.version>
         <scalacheck.version>1.14.3</scalacheck.version>
         <scalatestplus-check.version>3.1.0.0-RC2</scalatestplus-check.version>
